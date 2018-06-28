@@ -28,11 +28,12 @@
 </body>
 	<script>
 
-		const WAIT_INTERVAL = 1000
+		const WAIT_INTERVAL = 1500
+		const START_INTERVAL = 500
 
 		let TIMER = 60
-		// Let folks read the page
-		setTimeout(() => {
+
+		function startTimer() {
 
 			setInterval(() => {
 
@@ -48,28 +49,48 @@
 
 					document.getElementById("share").style.display = "block"
 
+					// TODO, clear setInterval()
+
 				}
 			}, 1000)
+		}
 
-			document.addEventListener("mousemove", function(e) {
+		function cheating() {
 
-				if (TIMER > 0) {
-					document.getElementById("cheater").style.visibility = "visible"
+			if (TIMER > 0) {
+				document.getElementById("cheater").style.visibility = "visible"
 
-					TIMER = 60
+				TIMER = 60
 
-					document.getElementById("timer").innerHTML = TIMER
+				document.getElementById("timer").innerHTML = TIMER
 
-					setInterval(() => {
+				setInterval(() => {
 
-						document.getElementById("cheater").style.visibility = "hidden"
-						// Another way of doing it
+					document.getElementById("cheater").style.visibility = "hidden"
+					// Another way of doing it
 
-					}, WAIT_INTERVAL)
-				}
-        
+				}, WAIT_INTERVAL)
+			}
+		}
+
+		// Let folks read the page
+		setTimeout(() => {
+
+			startTimer()
+
+			// Events
+			document.addEventListener("mousemove", (e) => {
+				cheating()
     		})
 
-		}, WAIT_INTERVAL)
+    		document.addEventListener("keypress", (e) => {
+				cheating()
+    		})
+
+    		window.onscroll = (e) => {
+    			cheating()
+    		}
+
+		}, START_INTERVAL)
 	</script>
 </html>
