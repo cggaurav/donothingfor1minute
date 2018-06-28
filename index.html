@@ -37,6 +37,10 @@
 
 			setInterval(() => {
 
+				if (document.visibilityState !== "visible") {
+					cheating()
+				}
+
 				if (TIMER > 0) {
 					TIMER -= 1
 				}
