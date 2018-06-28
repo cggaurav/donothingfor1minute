@@ -33,11 +33,29 @@
 
 		let TIMER = 60
 
+		function cheating() {
+
+			if (TIMER > 0) {
+				document.getElementById("cheater").style.visibility = "visible"
+
+				TIMER = 60
+
+				document.getElementById("timer").innerHTML = TIMER
+
+				setInterval(() => {
+
+					document.getElementById("cheater").style.visibility = "hidden"
+					// Another way of doing it
+
+				}, WAIT_INTERVAL)
+			}
+		}
+
 		function startTimer() {
 
 			setInterval(() => {
 
-				if (document.visibilityState !== "visible") {
+				if (!document.hasFocus()) {
 					cheating()
 				}
 
@@ -57,24 +75,6 @@
 
 				}
 			}, 1000)
-		}
-
-		function cheating() {
-
-			if (TIMER > 0) {
-				document.getElementById("cheater").style.visibility = "visible"
-
-				TIMER = 60
-
-				document.getElementById("timer").innerHTML = TIMER
-
-				setInterval(() => {
-
-					document.getElementById("cheater").style.visibility = "hidden"
-					// Another way of doing it
-
-				}, WAIT_INTERVAL)
-			}
 		}
 
 		// Let folks read the page
