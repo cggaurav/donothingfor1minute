@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Do nothing for 1 minute</title>
+	<link rel="stylesheet" href="./index.css">
+
+</head>
+<body>
+
+	<h1> Can you do nothing for <strong>1</strong> minute?</h1>
+
+	<p id="timer"> 60 </p>
+
+	<div id="share">
+
+		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="I did nothing for 1 minute, can you?" data-url="http://donothingfor1minute.cggaurav.net" data-show-count="false"> Share </a>
+		<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+	</div>
+
+	<p id="cheater"> 👎 </p>
+
+	<audio autoplay loop>
+	    <source src="./weightless.m4a">
+	</audio>
+
+
+</body>
+	<script>
+
+		const WAIT_INTERVAL = 1000
+
+		let TIMER = 60
+		// Let folks read the page
+		setTimeout(() => {
+
+			setInterval(() => {
+
+				if (TIMER > 0) {
+					TIMER -= 1
+				}
+
+				document.getElementById("timer").innerHTML = TIMER
+
+				if (TIMER === 0) {
+
+					document.getElementById("timer").innerHTML = "🎉"
+
+					document.getElementById("share").style.display = "block"
+
+				}
+			}, 1000)
+
+			document.addEventListener("mousemove", function(e) {
+
+				if (TIMER > 0) {
+					document.getElementById("cheater").style.visibility = "visible"
+
+					TIMER = 60
+
+					document.getElementById("timer").innerHTML = TIMER
+
+					setInterval(() => {
+
+						document.getElementById("cheater").style.visibility = "hidden"
+						// Another way of doing it
+
+					}, WAIT_INTERVAL)
+				}
+        
+    		})
+
+		}, WAIT_INTERVAL)
+	</script>
+</html>
