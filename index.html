@@ -81,8 +81,9 @@
 		setTimeout(() => {
 
 			startTimer()
-
+			
 			// Events
+
 			document.addEventListener("mousemove", (e) => {
 				cheating()
     		})
@@ -91,9 +92,21 @@
 				cheating()
     		})
 
+    		document.addEventListener("touchmove", (e) => {
+				cheating()
+    		})
+
+    		document.addEventListener("touchstart", (e) => {
+				cheating()
+    		})
+
 			window.onscroll = (e) => {
     			cheating()
     		}
+
+			document.addEventListener("scroll", (e) => {
+				cheating()
+			})
 
 		}, START_INTERVAL)
 	</script>
