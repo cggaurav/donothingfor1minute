@@ -14,6 +14,7 @@
 	</div>
 
 	<h1> Can you do nothing for <strong>1</strong> minute?</h1>
+	<button id="theme-toggle-button">Toggle Dark Mode</button>
 
 	<p id="timer"> 60 </p>
 
@@ -127,6 +128,33 @@
 				audioPlayer.pause();
 				stopButton.textContent = 'Play';
 			}
+		});
+	</script>
+	<script>
+		// Theme toggle script
+		const themeToggleButton = document.getElementById('theme-toggle-button');
+		const body = document.body;
+
+		themeToggleButton.addEventListener('click', () => {
+			body.classList.toggle('dark-mode');
+			if (body.classList.contains('dark-mode')) {
+				localStorage.setItem('theme', 'dark');
+			} else {
+				localStorage.setItem('theme', 'light');
+				// Or localStorage.removeItem('theme'); if you prefer to remove the key for light mode
+			}
+		});
+
+		// Apply saved theme on load
+		document.addEventListener('DOMContentLoaded', () => {
+			const savedTheme = localStorage.getItem('theme');
+			if (savedTheme === 'dark') {
+				body.classList.add('dark-mode');
+			}
+			// Optional: if you want to explicitly set light mode if nothing is saved or if 'light' is saved
+			// else if (savedTheme === 'light') {
+			//   body.classList.remove('dark-mode');
+			// }
 		});
 	</script>
 </html>

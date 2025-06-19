@@ -1,4 +1,14 @@
+:root {
+  --background-color: white;
+  --text-color: black;
+  --stop-button-bg-color: #f44336; /* Red for light mode */
+  --stop-button-text-color: white;
+  --stop-button-hover-bg-color: #d32f2f; /* Darker Red for light mode */
+}
+
 body {
+	background-color: var(--background-color);
+	color: var(--text-color);
 	font-family: "Helvetica";
 	font-size: 30px;
 	margin: 50px;
@@ -20,8 +30,8 @@ h1 {
 
 #stopButton {
 	padding: 10px 15px;
-	background-color: #f44336; /* Red */
-	color: white;
+	background-color: var(--stop-button-bg-color);
+	color: var(--stop-button-text-color);
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
@@ -29,7 +39,15 @@ h1 {
 }
 
 #stopButton:hover {
-	background-color: #d32f2f; /* Darker Red */
+	background-color: var(--stop-button-hover-bg-color);
+}
+
+body.dark-mode {
+  --background-color: #333; /* Dark gray */
+  --text-color: #f0f0f0;    /* Light gray */
+  --stop-button-bg-color: #B71C1C; /* Darker Red for dark mode */
+  --stop-button-hover-bg-color: #9C1818; /* Even darker Red for dark mode hover */
+  /* --stop-button-text-color remains white, it should provide good contrast on #B71C1C */
 }
 
 #share {
