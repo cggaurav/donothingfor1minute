@@ -9,6 +9,10 @@
 </head>
 <body>
 
+	<div style="position: absolute; top: 10px; right: 10px;">
+		<button id="stopButton">Stop</button>
+	</div>
+
 	<h1> Can you do nothing for <strong>1</strong> minute?</h1>
 
 	<p id="timer"> 60 </p>
@@ -21,7 +25,7 @@
 
 	<p id="cheater"> 👎 </p>
 
-	<audio autoplay loop>
+	<audio id="audioPlayer" autoplay loop>
 	    <source src="./weightless.m4a">
 	</audio>
 
@@ -110,5 +114,19 @@
 			})
 
 		}, START_INTERVAL)
+
+		// Stop/Play button functionality
+		const stopButton = document.getElementById('stopButton');
+		const audioPlayer = document.getElementById('audioPlayer');
+
+		stopButton.addEventListener('click', () => {
+			if (audioPlayer.paused) {
+				audioPlayer.play();
+				stopButton.textContent = 'Stop';
+			} else {
+				audioPlayer.pause();
+				stopButton.textContent = 'Play';
+			}
+		});
 	</script>
 </html>
