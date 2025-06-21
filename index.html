@@ -9,6 +9,11 @@
 </head>
 <body>
 
+	<div id="top-right-controls">
+		<button id="dark-mode-toggle">🌙</button>
+		<button id="sound-toggle">🔊</button>
+	</div>
+
 	<h1> Can you do nothing for <strong>1</strong> minute?</h1>
 	<button id="theme-toggle-button">Toggle Dark Mode</button>
 
@@ -22,10 +27,13 @@
 
 	<p id="cheater"> 👎 </p>
 
-	<audio autoplay loop>
-	    <source src="./weightless.m4a">
+	<audio id="background-music" autoplay loop>
+		<source src="./weightless.m4a">
 	</audio>
 
+	<div id="footer-credit">
+		By <a href="https://twitter.com/cggaurav" target="_blank" rel="noopener noreferrer">@cggaurav</a>
+	</div>
 
 </body>
 	<script>
@@ -34,6 +42,67 @@
 		const START_INTERVAL = 500
 
 		let TIMER = 60
+
+		// DOM Elements
+		const darkModeToggle = document.getElementById('dark-mode-toggle');
+		const soundToggle = document.getElementById('sound-toggle');
+		const audio = document.getElementById('background-music');
+
+		// Dark mode functionality
+		function toggleDarkMode() {
+			const body = document.body;
+			
+			if (body.getAttribute('data-theme') === 'dark') {
+				body.removeAttribute('data-theme');
+				darkModeToggle.textContent = '🌙';
+				localStorage.setItem('theme', 'light');
+			} else {
+				body.setAttribute('data-theme', 'dark');
+				darkModeToggle.textContent = '☀️';
+				localStorage.setItem('theme', 'dark');
+			}
+		}
+
+		// Sound functionality
+		function toggleSound() {
+			if (audio.muted) {
+				audio.muted = false;
+				soundToggle.textContent = '🔊';
+				localStorage.setItem('sound', 'on');
+			} else {
+				audio.muted = true;
+				soundToggle.textContent = '🔇';
+				localStorage.setItem('sound', 'off');
+			}
+		}
+
+		// Initialize theme from localStorage
+		function initializeTheme() {
+			const savedTheme = localStorage.getItem('theme');
+			
+			if (savedTheme === 'dark') {
+				document.body.setAttribute('data-theme', 'dark');
+				darkModeToggle.textContent = '☀️';
+			}
+		}
+
+		// Initialize sound from localStorage
+		function initializeSound() {
+			const savedSound = localStorage.getItem('sound');
+
+			if (savedSound === 'off') {
+				audio.muted = true;
+				soundToggle.textContent = '🔇';
+			}
+		}
+
+		// Initialize on page load
+		initializeTheme();
+		initializeSound();
+
+		// Event Listeners
+		darkModeToggle.addEventListener('click', toggleDarkMode);
+		soundToggle.addEventListener('click', toggleSound);
 
 		function cheating() {
 
@@ -87,24 +156,30 @@
 			// Events
 
 			document.addEventListener("mousemove", (e) => {
-				cheating()
-    		})
+				// Don't trigger cheating if interacting with the controls
+				if (!e.target.closest('#top-right-controls')) {
+					cheating()
+				}
+			})
 
 			document.addEventListener("keydown", (e) => {
 				cheating()
-    		})
+			})
 
-    		document.addEventListener("touchmove", (e) => {
+			document.addEventListener("touchmove", (e) => {
 				cheating()
-    		})
+			})
 
-    		document.addEventListener("touchstart", (e) => {
-				cheating()
-    		})
+			document.addEventListener("touchstart", (e) => {
+				// Don't trigger cheating if interacting with the controls
+				if (!e.target.closest('#top-right-controls')) {
+					cheating()
+				}
+			})
 
 			window.onscroll = (e) => {
-    			cheating()
-    		}
+				cheating()
+			}
 
 			document.addEventListener("scroll", (e) => {
 				cheating()
