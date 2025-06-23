@@ -1,17 +1,55 @@
 :root {
-  --background-color: white;
-  --text-color: black;
+	--bg-color: #ffffff;
+	--text-color: #000000;
+	--timer-color: #000000;
+}
+
+[data-theme="dark"] {
+	--bg-color: #1a1a1a;
+	--text-color: #ffffff;
+	--timer-color: #ffffff;
 }
 
 body {
-	background-color: var(--background-color);
-	color: var(--text-color);
 	font-family: "Helvetica";
 	font-size: 30px;
 	margin: 50px;
 	text-align: center;
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+#top-right-controls {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1000;
+	display: flex;
+	gap: 10px;
+}
+
+#dark-mode-toggle,
+#sound-toggle {
+	font-size: 24px;
+	cursor: pointer;
+	background: none;
+	border: none;
+	padding: 8px;
+	border-radius: 50%;
+	transition: background-color 0.3s ease;
+	outline: none;
+}
+
+#dark-mode-toggle:hover,
+#sound-toggle:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] #dark-mode-toggle:hover,
+[data-theme="dark"] #sound-toggle:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
 
 h1 {
 	text-align: center;
@@ -23,11 +61,7 @@ h1 {
 #timer {
 	font-size: 100px;
 	margin-top: 100px;
-}
-
-body.dark-mode {
-  --background-color: #333; /* Dark gray */
-  --text-color: #f0f0f0;    /* Light gray */
+	color: var(--timer-color);
 }
 
 #share {
@@ -39,4 +73,21 @@ body.dark-mode {
 	visibility: hidden;
 	font-size: 100px;
 	margin-top: 100px;
+}
+
+footer {
+	position: fixed;
+	bottom: 10px;
+	right: 15px;
+	font-size: 12px;
+	z-index: 1000;
+}
+
+footer a {
+	color: var(--text-color);
+	text-decoration: none;
+}
+
+footer a:hover {
+	text-decoration: underline;
 }

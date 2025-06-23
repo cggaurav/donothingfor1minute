@@ -4,8 +4,6 @@
 	<title>Do nothing for 1 minute</title>
 	<link rel="stylesheet" href="./index.css">
 	<link rel="shortcut icon" type="image/ico" href="./favicon.ico"/>
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6022876081781991" crossorigin="anonymous"></script>
-	<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "aa10e01d638a422fb7516f2940d58456"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
 <body>
 
@@ -15,13 +13,13 @@
 	</div>
 
 	<h1> Can you do nothing for <strong>1</strong> minute?</h1>
-	<button id="theme-toggle-button">Toggle Dark Mode</button>
 
 	<p id="timer"> 60 </p>
 
 	<div id="share">
 
-		<a href="https://twitter.com/intent/tweet?button_hashtag=Mindfulness&ref_src=twsrc%5Etfw&text=I did nothing for 1 minute - can you? https://donothingfor1minute.cggaurav.net" class="twitter-hashtag-button" data-show-count="false" data-size="Large">Yay 🥳 / Tweet this</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="I did nothing for 1 minute, can you?" data-url="https://github.com/cggaurav/donothingfor1minute" data-show-count="false"> Share </a>
+		<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 	</div>
 
@@ -31,9 +29,9 @@
 		<source src="./weightless.m4a">
 	</audio>
 
-	<div id="footer-credit">
-		By <a href="https://twitter.com/cggaurav" target="_blank" rel="noopener noreferrer">@cggaurav</a>
-	</div>
+	<footer>
+		<a href="https://twitter.com/cggaurav" target="_blank" rel="noopener noreferrer">by cggaurav</a>
+	</footer>
 
 </body>
 	<script>
@@ -69,6 +67,7 @@
 				audio.muted = false;
 				soundToggle.textContent = '🔊';
 				localStorage.setItem('sound', 'on');
+				audio.play().catch(e => console.error("Audio play failed:", e));
 			} else {
 				audio.muted = true;
 				soundToggle.textContent = '🔇';
@@ -105,6 +104,12 @@
 		soundToggle.addEventListener('click', toggleSound);
 
 		function cheating() {
+
+			// Address browser autoplay restrictions: the first interaction should start the music.
+			if (audio.paused && !audio.muted) {
+				audio.play().catch(e => console.error("Audio play failed:", e));
+				return;
+			}
 
 			if (TIMER > 0) {
 				document.getElementById("cheater").style.visibility = "visible"
@@ -186,32 +191,5 @@
 			})
 
 		}, START_INTERVAL)
-	</script>
-	<script>
-		// Theme toggle script
-		const themeToggleButton = document.getElementById('theme-toggle-button');
-		const body = document.body;
-
-		themeToggleButton.addEventListener('click', () => {
-			body.classList.toggle('dark-mode');
-			if (body.classList.contains('dark-mode')) {
-				localStorage.setItem('theme', 'dark');
-			} else {
-				localStorage.setItem('theme', 'light');
-				// Or localStorage.removeItem('theme'); if you prefer to remove the key for light mode
-			}
-		});
-
-		// Apply saved theme on load
-		document.addEventListener('DOMContentLoaded', () => {
-			const savedTheme = localStorage.getItem('theme');
-			if (savedTheme === 'dark') {
-				body.classList.add('dark-mode');
-			}
-			// Optional: if you want to explicitly set light mode if nothing is saved or if 'light' is saved
-			// else if (savedTheme === 'light') {
-			//   body.classList.remove('dark-mode');
-			// }
-		});
 	</script>
 </html>
